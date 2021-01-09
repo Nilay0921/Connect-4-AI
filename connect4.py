@@ -42,22 +42,18 @@ def print_board(board):
     print(np.flip(board, 0))
 
 def win_checker(board, peice):
-    #checks the horizontal wins
     for c in range(COLS - 3):
         for r in range(ROWS):
             if board[r][c] == peice and board[r][c+1] == peice and board[r][c+2] == peice and board[r][c+3] == peice:
                 return True
-    #check vertical wins
     for r in range(ROWS - 3):
         for c in range(COLS):
             if board[r][c] == peice and board[r+1][c] == peice and board[r+2][c] == peice and board[r+3][c] == peice:
                 return True
-    #check postively sloped diagonals
     for r in range(ROWS - 3):
         for c in range(COLS - 3):
             if board[r][c] == peice and board[r+1][c+1] == peice and board[r+2][c+2] == peice and board[r+3][c+3] == peice:
                 return True
-    #check negativly sloped diagonals
     for r in range(3, ROWS):
         for c in range(COLS - 3):
             if board[r][c] == peice and board[r-1][c+1] == peice and board[r-2][c+2] == peice and board[r-3][c+3] == peice:
@@ -220,8 +216,6 @@ RADIUS = int(SIZESQUARE/2 - 3)
 size = (width, height)
 
 screen_display = pygame.display.set_mode(size)
-#draw_board(board)
-#pygame.display.update()
 
 font = pygame.font.SysFont("arial", 75)
 menu_font = pygame.font.SysFont("arial", 150)
@@ -260,7 +254,6 @@ def main_menu():
 
 def two_player_game(is_game_over, turn):
 
-    #screen_display = pygame.display.set_mode(size)
     draw_board(board)
     pygame.display.update()
 
@@ -315,7 +308,6 @@ def two_player_game(is_game_over, turn):
                             screen_display.blit(label, (160, 10))
                             is_game_over = True
 
-                #print_board(board)
                 draw_board(board)
 
                 if is_game_over:
@@ -325,7 +317,6 @@ def two_player_game(is_game_over, turn):
 
 def ai_game(is_game_over, turn):
 
-    #screen_display = pygame.display.set_mode(size)
     draw_board(board)
     pygame.display.update()
 
@@ -364,8 +355,6 @@ def ai_game(is_game_over, turn):
                         draw_board(board)
                             
         if turn == AI and not is_game_over:
-            #col = random.randint(0, COLS - 1)
-            #col = best_move(board, AI_PEICE)
             col, minimax_score = mini_max(board, 5, True, -math.inf, math.inf)
             if is_valid_spot(board, col):
                 pygame.time.wait(400)
